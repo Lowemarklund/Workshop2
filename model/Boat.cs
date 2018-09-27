@@ -1,6 +1,6 @@
 using System;
 
-namespace model
+namespace Model
 {
     class Boat
     {
