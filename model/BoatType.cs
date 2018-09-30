@@ -1,5 +1,6 @@
 using System;
 
-namespace Model{
+namespace lm222qb_workshop2
+{
     public enum BoatType {Sailboat, Motorsailer, Kayak, Canoe, Other};
 }

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Model
+namespace lm222qb_workshop2
 {
     /// <summary>
     /// A class representing a member in the yacht club.
@@ -16,7 +16,7 @@ namespace Model
         private int _id;
 
         //The Members personal number.
-        private int _number;
+        private string _number;
 
         //The boats belonging to the member.
         private List<Boat> _boats = new List<Boat>();
@@ -41,7 +41,7 @@ namespace Model
             }
         }
 
-        public int Number {
+        public string Number {
             get{
                return _number;
             }
@@ -69,17 +69,17 @@ namespace Model
         /// <summary>
         /// Creates an instance of the Member class.
         /// </summary>
-        public Member(string name, int id, int number){
+        public Member(string name, string number, int id){
             Name = name;
-            Id = id; 
             Number = number;
+            Id = id; 
         }
 
         /// <summary>
         /// Creates a string containing the member's information.
         /// </summary>
         public override string ToString(){
-            string memberInfoString = $"Name: {this.Name}\nId: {this.Id}\nPersonal number: {this.Number}\n";
+            string memberInfoString = $"\nName: {this.Name}\nId: {this.Id}\nPersonal number: {this.Number}";
 
             return memberInfoString;
         }

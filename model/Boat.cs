@@ -1,6 +1,6 @@
 using System;
 
-namespace Model
+namespace lm222qb_workshop2
 {
     /// <summary>
     /// A class representing a boat at the yacht club.
