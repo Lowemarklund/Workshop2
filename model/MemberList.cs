@@ -18,15 +18,16 @@ namespace lm222qb_workshop2
             if(_members.Count == 0){
                 memberID = 0;
             }else{
-                memberID = _members[_members.Count - 1].Id-1;
+                memberID = _members[_members.Count - 1].Id+1;
             }
 
             Member newMember = new Member(name, number, memberID);
             _members.Add(newMember);
         }
 
-        public void DeleteMember(){
-            
+        public void deleteMember(int id){
+            _members.RemoveAt(id);
+            updateMemberIDs();
         }
 
         public void updateMember(){
@@ -41,6 +42,11 @@ namespace lm222qb_workshop2
             return _members;
         }
 
+        public void updateMemberIDs (){
+            for(int i = 0; i <_members.Count; i++){
+                _members[i].Id = i;
+            }
+        }
         public MemberList(){
             //members = file of members
         }

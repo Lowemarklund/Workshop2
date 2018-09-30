@@ -26,7 +26,7 @@ namespace lm222qb_workshop2
                return _name;
             }
 
-            private set{
+            set{
                 _name = value;
             }
         }
@@ -36,7 +36,7 @@ namespace lm222qb_workshop2
                return _id;
             }
 
-            private set{
+            set{
                 _id = value;
             }
         }
@@ -46,7 +46,7 @@ namespace lm222qb_workshop2
                return _number;
             }
 
-            private set{
+            set{
                 _number = value;
             }
         }

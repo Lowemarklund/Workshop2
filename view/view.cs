@@ -19,8 +19,8 @@ namespace lm222qb_workshop2
         }
         //The main menu of the user interface.
         public string mainView(){
-            Console.WriteLine("\nMain Menu\n1. Add Member\n2. Delete Member\n3. Update Member\n4. View Member\n");
-            Console.WriteLine("Choose action (1-4)");
+            Console.WriteLine("\nMain Menu\n1. Add Member\n2. Delete Member\n3. Update Member\n4. View Member\n5. List Members\n");
+            Console.WriteLine("Choose action (1-5)");
             string userInput = Console.ReadLine();
             return userInput;
         }
@@ -29,11 +29,11 @@ namespace lm222qb_workshop2
         public List<String> addMemberView(){
             
             Console.WriteLine("\n-----ADD MEMBER-----\n");
-            Console.WriteLine("Enter name:");
+            Console.WriteLine("Enter name of member:");
             string nameInput = Console.ReadLine();
 
             Console.WriteLine("\n-----ADD MEMBER-----\n");
-            Console.WriteLine("Enter personal:");
+            Console.WriteLine("Enter personal number of member:");
 
             string numberInput = Console.ReadLine();
 
@@ -43,6 +43,13 @@ namespace lm222qb_workshop2
             nameAndNumberInput.Add(numberInput);
 
             return nameAndNumberInput;
+        }
+
+        public string deleteMemberView(){
+            Console.WriteLine("\n-----DELETE MEMBER-----\n");
+            Console.WriteLine("Enter ID of the member to be deleted:");
+            string userInput = Console.ReadLine();
+            return userInput;
         }
 
     }
