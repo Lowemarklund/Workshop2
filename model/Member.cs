@@ -61,10 +61,33 @@ namespace lm222qb_workshop2
         /// <summary>
         /// Adds a boat to the list of boats belonging to the member.
         /// </summary>
-        public void addBoat(BoatType type, string id, int length ){
-            Boat newBoat = new Boat (type, id, length);
+        public void addBoat(string type, int length ){
+            Boat newBoat = new Boat (type, length);
             _boats.Add(newBoat);
         }
+
+        /// <summary>
+        /// Removes a boat from the list of boats belonging to the member.
+        /// </summary>
+        public void deleteBoat(string type){
+          for(int i = 0; i < _boats.Count; i++){
+              if(_boats[i].Type == type){
+                  _boats.Remove(_boats[i]);
+              }
+          }
+        }
+
+        /// <summary>
+        /// Updates a boat's length in the list of boats belonging to the member.
+        /// </summary>
+        public void updateBoat(string type, int length){
+          for(int i = 0; i < _boats.Count; i++){
+              if(_boats[i].Type == type){
+                  _boats[i].Length = length;
+              }
+          }
+        }
+
 
         /// <summary>
         /// Creates an instance of the Member class.
@@ -79,7 +102,7 @@ namespace lm222qb_workshop2
         /// Creates a string containing the member's information.
         /// </summary>
         public override string ToString(){
-            string memberInfoString = $"\nName: {this.Name}\nId: {this.Id}\nPersonal number: {this.Number}";
+            string memberInfoString = $"\nName: {this.Name}\nId: {this.Id}\nPersonal number: {this.Number}\nBoat: {this._boats[0].Type} \nBoat length: {this._boats[0].Length}";
 
             return memberInfoString;
         }

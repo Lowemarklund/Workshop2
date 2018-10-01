@@ -47,6 +47,15 @@ namespace lm222qb_workshop2
                 _members[i].Id = i;
             }
         }
+
+        // private void writeMemberListToFile(){
+        //     string json = JsonConvert.SerializeObject(_members.ToArray());
+        // }
+
+        // private void loadMemberListFromFile(){
+
+        // }
+
         public MemberList(){
             //members = file of members
         }
