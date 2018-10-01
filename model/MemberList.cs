@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace lm222qb_workshop2
 {
@@ -30,14 +32,10 @@ namespace lm222qb_workshop2
             updateMemberIDs();
         }
 
-        public void updateMember(){
-            
-        }
-
         public void getMember(){
             
         }
-
+        //fixa privacy leak
         public List<Member> getMembers(){
             return _members;
         }
@@ -48,16 +46,20 @@ namespace lm222qb_workshop2
             }
         }
 
-        // private void writeMemberListToFile(){
-        //     string json = JsonConvert.SerializeObject(_members.ToArray());
-        // }
+        public void writeMemberListToFile(){
+            string json = JsonConvert.SerializeObject(_members);
+            File.WriteAllText(@"/Users/lowemarklund/Studier/1dv607/members.txt", String.Empty);
+            System.IO.File.WriteAllText(@"/Users/lowemarklund/Studier/1dv607/members.txt", json);
+        }
 
-        // private void loadMemberListFromFile(){
-
-        // }
+        private List<Member> loadMemberListFromFile(){
+            var jsonContents = System.IO.File.ReadAllText(@"/Users/lowemarklund/Studier/1dv607/members.txt");
+            List<Member> memberList = JsonConvert.DeserializeObject<List<Member>>(jsonContents);
+            return memberList;
+        }
 
         public MemberList(){
-            //members = file of members
+           _members = loadMemberListFromFile();
         }
 
     }

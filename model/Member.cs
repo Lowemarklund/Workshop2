@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace lm222qb_workshop2
 {
@@ -19,6 +20,7 @@ namespace lm222qb_workshop2
         private string _number;
 
         //The boats belonging to the member.
+        [JsonProperty("Boats")]
         private List<Boat> _boats = new List<Boat>();
 
         public string Name {
@@ -51,9 +53,6 @@ namespace lm222qb_workshop2
             }
         }
 
-        /// <summary>
-        /// Returns a list a with the boats belonging to the member.
-        /// </summary>
         public List<Boat> getBoats(){
             return _boats.Select(boat => (Boat) boat.Copy()).ToList();
         }
@@ -88,6 +87,10 @@ namespace lm222qb_workshop2
           }
         }
 
+        public void updateMemberInfo(string name, string number){
+            this.Name = name;
+            this.Number = number;
+        }
 
         /// <summary>
         /// Creates an instance of the Member class.
@@ -97,15 +100,5 @@ namespace lm222qb_workshop2
             Number = number;
             Id = id; 
         }
-
-        /// <summary>
-        /// Creates a string containing the member's information.
-        /// </summary>
-        public override string ToString(){
-            string memberInfoString = $"\nName: {this.Name}\nId: {this.Id}\nPersonal number: {this.Number}\nBoat: {this._boats[0].Type} \nBoat length: {this._boats[0].Length}";
-
-            return memberInfoString;
-        }
-
     }
 }

@@ -131,6 +131,33 @@ namespace lm222qb_workshop2
 
             return boatTypeAndLengthInput;
         }
+        public string selectMemberView(){
+            Console.WriteLine("\n-----VIEW MEMBER-----\n");
+            Console.WriteLine("Enter ID of the member to be viewed:");
+            string memberIdInput = Console.ReadLine();
+            return memberIdInput;
+
+        }
+        public void viewMemberInfoView(MemberList memberList, int id){
+            Console.WriteLine("\n-----VIEW MEMBER-----\n");
+            Console.WriteLine("___________________");
+            foreach(Member member in memberList.getMembers()){
+                int i = 1;
+                if(member.Id == id){
+                    string memberInfoString = $"\nName: {member.Name}\nPersonal number: {member.Number}\nId: {member.Id}\n";
+                    Console.WriteLine(memberInfoString);
+
+                //Writes out each boats information
+                foreach(Boat boat in member.getBoats()){
+                    string boatInfoString = $"Boat #{i}\nType: {boat.Type}\nLength: {boat.Length}\n";
+                    i++;
+                    Console.WriteLine(boatInfoString);
+                }
+                }
+                
+            }
+            Console.WriteLine("___________________");
+        }
 
 
         public string listMembersView(){
@@ -139,6 +166,35 @@ namespace lm222qb_workshop2
             Console.WriteLine("Choose type of List (1-2):");
             string userInput = Console.ReadLine();
             return userInput;
+        }
+
+        public void compactListView(MemberList memberList){
+            Console.WriteLine("\n-----COMPACT MEMBER LIST-----\n");
+            Console.WriteLine("___________________");
+            foreach(Member member in memberList.getMembers()){
+                string memberInfoString = $"\nName: {member.Name}\nId: {member.Id}\nNumber of boats: {member.getBoats().Count}\n";
+                Console.WriteLine(memberInfoString);
+                Console.WriteLine("___________________");
+            }
+        }
+
+        public void verboseListView(MemberList memberList){
+            Console.WriteLine("\n-----VERBOSE MEMBER LIST-----\n");
+            Console.WriteLine("___________________");
+
+            foreach(Member member in memberList.getMembers()){
+                int i = 1;
+                string memberInfoString = $"\nName: {member.Name}\nPersonal number: {member.Number}\nId: {member.Id}\n";
+                Console.WriteLine(memberInfoString);
+
+                //Writes out each boats information
+                foreach(Boat boat in member.getBoats()){
+                    string boatInfoString = $"Boat #{i}\nType: {boat.Type}\nLength: {boat.Length}\n";
+                    i++;
+                    Console.WriteLine(boatInfoString);
+                }
+                Console.WriteLine("___________________");
+            }
         }
 
         public void errorMessage (string errorString){

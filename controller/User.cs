@@ -22,6 +22,10 @@ namespace lm222qb_workshop2
                 updateMember(view, memberList);
             }
 
+            if(userInput == "4"){
+                viewMemberInfoView(view, memberList);
+            }
+
             if(userInput == "5"){
                 listMembers(view, memberList);
             }
@@ -33,6 +37,7 @@ namespace lm222qb_workshop2
             List<String> nameAndNumberinput = view.addMemberView();
             memberList.addMember(nameAndNumberinput[0], nameAndNumberinput[1]);
             Console.WriteLine("\nMember Added.");
+            memberList.writeMemberListToFile();
         }
 
         public void deleteMember(View view, MemberList memberList){
@@ -40,6 +45,7 @@ namespace lm222qb_workshop2
             string memberId = view.deleteMemberView();
             memberList.deleteMember(Int32.Parse(memberId));
             Console.WriteLine("\nMember Deleted.");
+            memberList.writeMemberListToFile();
         }
 
         public void updateMember(View view, MemberList memberList){
@@ -54,8 +60,7 @@ namespace lm222qb_workshop2
 
                 foreach(Member member in memberList.getMembers()){
                     if(member.Id == memberId){
-                        member.Name = nameAndNumberinput[0];
-                        member.Number = nameAndNumberinput[1];
+                        member.updateMemberInfo(nameAndNumberinput[0], nameAndNumberinput[1]);
                     }
                 }
             }
@@ -69,6 +74,7 @@ namespace lm222qb_workshop2
                     }
                 }
             }
+
             //Delete boat
             if(action == "3"){
                 String boatTypeInput = view.deleteBoatView();
@@ -87,13 +93,22 @@ namespace lm222qb_workshop2
                     }
                 }
             }
+            memberList.writeMemberListToFile();
+        }
 
+        public void viewMemberInfoView(View view, MemberList memberList){
+            string memberIdInput = view.selectMemberView();
+            view.viewMemberInfoView(memberList, Int32.Parse(memberIdInput));
         }
 
         public void listMembers(View view, MemberList memberList){
-            // string listTypeInput = view.listMembersView();
-            foreach(Member member in memberList.getMembers()){
-                Console.WriteLine(member.ToString());
+            string listTypeInput = view.listMembersView();
+            if(listTypeInput == "1"){
+                view.compactListView(memberList);
+            }
+
+            if(listTypeInput == "2"){
+                view.verboseListView(memberList);
             }
         }
 
