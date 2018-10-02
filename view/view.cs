@@ -6,7 +6,7 @@ using System.Linq;
 namespace lm222qb_workshop2
 {
     /// <summary>
-    /// A class representing a the userinterface of the CRUD system.
+    /// A class representing the userinterface of the CRUD system.
     /// </summary>
     class View
     {
@@ -15,8 +15,8 @@ namespace lm222qb_workshop2
         }
         //The main menu of the user interface.
         public string mainView(){
-            Console.WriteLine("\nMain Menu\n1. Add Member\n2. Delete Member\n3. Update Member (Change member info, Add boat, Delete boat, Update boat) \n4. View Member\n5. List Members\n");
-            Console.WriteLine("Choose action (1-5):");
+            Console.WriteLine("\nMAIN MENU\n1. Add Member\n2. Delete Member\n3. Update Member (Change member info, Add boat, Delete boat, Update boat) \n4. View Member\n5. List Members\n6. Quit\n");
+            Console.WriteLine("Choose action (1-6):");
             string userInput = Console.ReadLine();
             return userInput;
         }
@@ -52,7 +52,7 @@ namespace lm222qb_workshop2
             Console.WriteLine("\n-----UPDATE MEMBER-----\n");
             Console.WriteLine("Enter ID of the member to be updated:");
             string memberIdInput = Console.ReadLine();
-
+     
             Console.WriteLine("\n1. Change member info\n2. Add boat\n3. Delete boat\n4. Update boat\n");
             Console.WriteLine("Choose action (1-4):");
             string actionInput = Console.ReadLine();
@@ -87,7 +87,7 @@ namespace lm222qb_workshop2
         public List<String> addBoatView(){
             
             Console.WriteLine("\n-----ADD BOAT-----\n");
-            Console.WriteLine("Enter boat type (Sailboat, Motorsailer, kayak/Canoe, Other):");
+            Console.WriteLine("Enter boat type (Sailboat, Motorsailer, Kayak, Canoe, Other):");
             string boatTypeInput = Console.ReadLine();
 
             Console.WriteLine("\n-----ADD BOAT-----\n");
@@ -107,7 +107,7 @@ namespace lm222qb_workshop2
         public string deleteBoatView(){
             
             Console.WriteLine("\n-----DELETE BOAT-----\n");
-            Console.WriteLine("Enter the type of the boat to be deleted:");
+            Console.WriteLine("Enter the type of the boat to be deleted (Sailboat, Motorsailer, Kayak, Canoe, Other):");
             string boatTypeInput = Console.ReadLine();
 
             return boatTypeInput;
@@ -116,7 +116,7 @@ namespace lm222qb_workshop2
          public List<String> updateBoatView(){
             
             Console.WriteLine("\n-----UPDATE BOAT-----\n");
-            Console.WriteLine("Enter new boat type (Sailboat, Motorsailer, kayak/Canoe, Other):");
+            Console.WriteLine("Enter new boat type (Sailboat, Motorsailer, Kayak, Canoe, Other):");
             string boatTypeInput = Console.ReadLine();
 
             Console.WriteLine("\n-----UPDATE BOAT-----\n");
@@ -124,7 +124,7 @@ namespace lm222qb_workshop2
 
             string boatLengthInput = Console.ReadLine();
 
-            List<String> boatTypeAndLengthInput = new  List<String>();
+            List<String> boatTypeAndLengthInput = new List<String>();
 
             boatTypeAndLengthInput.Add(boatTypeInput);
             boatTypeAndLengthInput.Add(boatLengthInput);
@@ -197,7 +197,32 @@ namespace lm222qb_workshop2
             }
         }
 
-        public void errorMessage (string errorString){
+        public void errorMessage (int errorType){
+            if(errorType == 1){
+                Console.WriteLine("\nInvalid member ID.");
+            }
+
+            if(errorType == 2){
+                Console.WriteLine("\nInvalid action.");
+            }
+
+            if(errorType == 3){
+                Console.WriteLine("\nInvalid boat type.");
+            }
+
+            if(errorType == 4){
+                Console.WriteLine("\nMember already has that type of boat (Members can only have one of each type of boat).");
+            }
+
+            if(errorType == 5){
+                Console.WriteLine("\nMember doesn't own that type of boat.");
+            }
+
+             if(errorType == 6){
+                Console.WriteLine("\nNo members have yet to be added.");
+            }
+
+
 
         }
 

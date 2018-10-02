@@ -92,6 +92,10 @@ namespace lm222qb_workshop2
             this.Number = number;
         }
 
+        public Member Copy(){
+            return (Member)MemberwiseClone();        
+        }
+
         /// <summary>
         /// Creates an instance of the Member class.
         /// </summary>

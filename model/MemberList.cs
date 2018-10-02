@@ -32,12 +32,13 @@ namespace lm222qb_workshop2
             updateMemberIDs();
         }
 
-        public void getMember(){
-            
-        }
-        //fixa privacy leak
         public List<Member> getMembers(){
-            return _members;
+            List<Member> memberListCopy = new List<Member>();
+            
+            foreach(Member member in _members){
+                memberListCopy.Add(member.Copy());
+            }
+            return memberListCopy;
         }
 
         public void updateMemberIDs (){
@@ -47,13 +48,23 @@ namespace lm222qb_workshop2
         }
 
         public void writeMemberListToFile(){
+            string path = System.IO.Directory.GetCurrentDirectory();
             string json = JsonConvert.SerializeObject(_members);
-            File.WriteAllText(@"/Users/lowemarklund/Studier/1dv607/members.txt", String.Empty);
-            System.IO.File.WriteAllText(@"/Users/lowemarklund/Studier/1dv607/members.txt", json);
+            File.WriteAllText($@"{path}/members.txt", String.Empty);
+            System.IO.File.WriteAllText($@"{path}/members.txt", json);
         }
 
         private List<Member> loadMemberListFromFile(){
-            var jsonContents = System.IO.File.ReadAllText(@"/Users/lowemarklund/Studier/1dv607/members.txt");
+            string path = System.IO.Directory.GetCurrentDirectory();
+            
+            //Error handling if file is empty.
+            if(new FileInfo( $@"{path}/members.txt" ).Length == 0){
+                Console.WriteLine("1weqasd");
+                //returns empty list of members.
+                return getMembers();
+            }
+
+            var jsonContents = System.IO.File.ReadAllText($@"{path}/members.txt");
             List<Member> memberList = JsonConvert.DeserializeObject<List<Member>>(jsonContents);
             return memberList;
         }
