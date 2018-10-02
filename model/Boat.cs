@@ -12,7 +12,7 @@ namespace lm222qb_workshop2
 
         //The length of the Boat.
         private int _length;
-
+        
         public string Type {
             get{
                return _type;
@@ -50,18 +50,5 @@ namespace lm222qb_workshop2
         public Boat Copy(){
             return (Boat)MemberwiseClone();        
         }
-
-        /// <summary>
-        /// Creates a string containing information about the boat.
-        /// </summary>
-        /// <returns>
-        /// a string containing information about the boat.
-        /// </returns>
-        public override string ToString(){
-            string memberInfoString = $"Type: {this.Type}\nLength: {this.Length}";
-
-            return memberInfoString;
-        }
-
     }
 }

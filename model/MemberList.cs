@@ -11,8 +11,12 @@ namespace lm222qb_workshop2
     /// </summary>
     class MemberList
     {
+        // The list of members
         private List<Member> _members = new List<Member>();
 
+        /// <summary>
+        /// Adds a member to the list.
+        /// </summary>
         public void addMember(string name, string number){
            
             int memberID; 
@@ -27,11 +31,20 @@ namespace lm222qb_workshop2
             _members.Add(newMember);
         }
 
+        /// <summary>
+        /// Removes a member from the list.
+        /// </summary>
         public void deleteMember(int id){
             _members.RemoveAt(id);
             updateMemberIDs();
         }
 
+        /// <summary>
+        /// Creates a copy of the list of members.
+        /// </summary>
+        /// <returns>
+        /// A copy of the member list.
+        /// </returns>
         public List<Member> getMembers(){
             List<Member> memberListCopy = new List<Member>();
             
@@ -41,12 +54,18 @@ namespace lm222qb_workshop2
             return memberListCopy;
         }
 
+        /// <summary>
+        /// Updates the IDs of the members in the list.
+        /// </summary>
         public void updateMemberIDs (){
             for(int i = 0; i <_members.Count; i++){
                 _members[i].Id = i;
             }
         }
 
+        /// <summary>
+        /// Saves the member list to file.
+        /// </summary>
         public void writeMemberListToFile(){
             string path = System.IO.Directory.GetCurrentDirectory();
             string json = JsonConvert.SerializeObject(_members);
@@ -54,6 +73,12 @@ namespace lm222qb_workshop2
             System.IO.File.WriteAllText($@"{path}/members.txt", json);
         }
 
+        /// <summary>
+        /// Loads a member list from file.
+        /// </summary>
+        /// <returns>
+        /// A member list.
+        /// </returns>
         private List<Member> loadMemberListFromFile(){
             string path = System.IO.Directory.GetCurrentDirectory();
             
@@ -69,6 +94,9 @@ namespace lm222qb_workshop2
             return memberList;
         }
 
+        /// <summary>
+        /// Creates an instance of the MemberList class.
+        /// </summary>
         public MemberList(){
            _members = loadMemberListFromFile();
         }

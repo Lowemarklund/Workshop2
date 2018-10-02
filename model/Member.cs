@@ -53,6 +53,12 @@ namespace lm222qb_workshop2
             }
         }
 
+         /// <summary>
+        /// Creates a copy of the list of boats beloning to the member.
+        /// </summary>
+        /// <returns>
+        /// A copy of the boat list.
+        /// </returns>
         public List<Boat> getBoats(){
             return _boats.Select(boat => (Boat) boat.Copy()).ToList();
         }
@@ -87,11 +93,20 @@ namespace lm222qb_workshop2
           }
         }
 
+        /// <summary>
+        /// Updates a members information.
+        /// </summary>
         public void updateMemberInfo(string name, string number){
             this.Name = name;
             this.Number = number;
         }
 
+          /// <summary>
+        /// Creates a copy of the member.
+        /// </summary>
+        /// <returns>
+        /// A copy of the member.
+        /// </returns>
         public Member Copy(){
             return (Member)MemberwiseClone();        
         }

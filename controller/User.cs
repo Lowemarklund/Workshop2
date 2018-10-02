@@ -7,7 +7,12 @@ namespace lm222qb_workshop2
 {
     class User{
         
-        //Starts the application
+         /// <summary>
+        /// Starts the CRUD Application
+        /// </summary>
+        /// <returns>
+        /// Boolean.
+        /// </returns>
         public bool run(View view, MemberList memberList){
 
             string userInput = view.mainView();
@@ -24,26 +29,31 @@ namespace lm222qb_workshop2
             }
 
             if(userInput == "4"){
-                viewMemberInfoView(view, memberList);
+                viewMemberInfo(view, memberList);
             }
 
             if(userInput == "5"){
                 listMembers(view, memberList);
             }
-
+            //Keeps running until user chooses to quit and false is returned.
             if(userInput == "6"){
                 return false;
             }
-
             return true;
         }
 
+        /// <summary>
+        /// Adds a member to the list.
+        /// </summary>
         public void addMember(View view, MemberList memberList){
             List<String> nameAndNumberinput = view.addMemberView();
             memberList.addMember(nameAndNumberinput[0], nameAndNumberinput[1]);
             memberList.writeMemberListToFile();
         }
 
+        /// <summary>
+        /// Removes a member from the list.
+        /// </summary>
         public void deleteMember(View view, MemberList memberList){
             string memberId = view.deleteMemberView();
 
@@ -57,6 +67,9 @@ namespace lm222qb_workshop2
             memberList.writeMemberListToFile();
         }
 
+        /// <summary>
+        /// Updates a members information.
+        /// </summary>
         public void updateMember(View view, MemberList memberList){
 
             List<String> memberIdandActionInput = view.updateMemberView();
@@ -134,20 +147,26 @@ namespace lm222qb_workshop2
                 view.errorMessage(2);
                 return;
             }
-
+            //Saves member list to file.
             memberList.writeMemberListToFile();
         }
 
-        public void viewMemberInfoView(View view, MemberList memberList){
+         /// <summary>
+        /// Gets a members info.
+        /// </summary>
+        public void viewMemberInfo(View view, MemberList memberList){
             int memberId = Int32.Parse(view.selectMemberView());
             //Error handling
             if(checkID(memberList, memberId) == false){
                 view.errorMessage(1);
                 return;
             }
-            view.viewMemberInfoView(memberList, memberId);
+            view.memberInfoView(memberList, memberId);
         }
 
+         /// <summary>
+        /// Lists members.
+        /// </summary>
         public void listMembers(View view, MemberList memberList){
             string listTypeInput = view.listMembersView();
             if(memberList.getMembers().Count == 0){
@@ -169,6 +188,12 @@ namespace lm222qb_workshop2
             }
         }
 
+         /// <summary>
+        /// Checks if member ID exists in member list.
+        /// </summary>
+         /// <returns>
+        /// Boolean.
+        /// </returns>
         public bool checkID(MemberList memberList, int memberId){
             foreach(Member member in memberList.getMembers()){
                 if(memberId == member.Id){
@@ -178,6 +203,12 @@ namespace lm222qb_workshop2
             return false;
         }
 
+        /// <summary>
+        /// Checks if boat exists in members boat list.
+        /// </summary>
+         /// <returns>
+        /// Boolean.
+        /// </returns>
         public bool checkBoat(Member member, string boatType){
             foreach(Boat boat in member.getBoats()){
                 if(boatType == boat.Type){
@@ -186,11 +217,5 @@ namespace lm222qb_workshop2
             }
             return false;
         }
-
-
-        public User(){
-           
-        }
-
     }
 }

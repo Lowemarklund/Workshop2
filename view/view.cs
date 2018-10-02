@@ -10,10 +10,10 @@ namespace lm222qb_workshop2
     /// </summary>
     class View
     {
-        public View(){
-
-        }
-        //The main menu of the user interface.
+     
+        /// <summary>
+        /// Renders the main menu view.
+        /// </summary>
         public string mainView(){
             Console.WriteLine("\nMAIN MENU\n1. Add Member\n2. Delete Member\n3. Update Member (Change member info, Add boat, Delete boat, Update boat) \n4. View Member\n5. List Members\n6. Quit\n");
             Console.WriteLine("Choose action (1-6):");
@@ -21,7 +21,9 @@ namespace lm222qb_workshop2
             return userInput;
         }
 
-        
+        /// <summary>
+        /// Renders the add member view.
+        /// </summary>
         public List<String> addMemberView(){
             
             Console.WriteLine("\n-----ADD MEMBER-----\n");
@@ -41,6 +43,9 @@ namespace lm222qb_workshop2
             return nameAndNumberInput;
         }
 
+        /// <summary>
+        /// Renders the delete member view.
+        /// </summary>
         public string deleteMemberView(){
             Console.WriteLine("\n-----DELETE MEMBER-----\n");
             Console.WriteLine("Enter ID of the member to be deleted:");
@@ -48,6 +53,9 @@ namespace lm222qb_workshop2
             return userInput;
         }
 
+        /// <summary>
+        /// Renders the update member menu view.
+        /// </summary>
         public List<String> updateMemberView(){
             Console.WriteLine("\n-----UPDATE MEMBER-----\n");
             Console.WriteLine("Enter ID of the member to be updated:");
@@ -65,6 +73,9 @@ namespace lm222qb_workshop2
             return memberIDandActionInput;
         }
 
+        /// <summary>
+        /// Renders the update member info view.
+        /// </summary>
         public List<String> updateMemberInfoView(){
             
             Console.WriteLine("\n-----UPDATE MEMBER INFO-----\n");
@@ -84,6 +95,9 @@ namespace lm222qb_workshop2
             return nameAndNumberInput;
         }
 
+        /// <summary>
+        /// Renders the add boat view.
+        /// </summary>
         public List<String> addBoatView(){
             
             Console.WriteLine("\n-----ADD BOAT-----\n");
@@ -103,7 +117,9 @@ namespace lm222qb_workshop2
             return boatTypeAndLengthInput;
         }
 
-
+        /// <summary>
+        /// Renders the delete boat view.
+        /// </summary>
         public string deleteBoatView(){
             
             Console.WriteLine("\n-----DELETE BOAT-----\n");
@@ -113,6 +129,9 @@ namespace lm222qb_workshop2
             return boatTypeInput;
         }
 
+         /// <summary>
+        /// Renders the update boat view.
+        /// </summary>
          public List<String> updateBoatView(){
             
             Console.WriteLine("\n-----UPDATE BOAT-----\n");
@@ -131,6 +150,9 @@ namespace lm222qb_workshop2
 
             return boatTypeAndLengthInput;
         }
+         /// <summary>
+        /// Renders the select member to be viewed view.
+        /// </summary>
         public string selectMemberView(){
             Console.WriteLine("\n-----VIEW MEMBER-----\n");
             Console.WriteLine("Enter ID of the member to be viewed:");
@@ -138,7 +160,10 @@ namespace lm222qb_workshop2
             return memberIdInput;
 
         }
-        public void viewMemberInfoView(MemberList memberList, int id){
+         /// <summary>
+        /// Renders the member info view.
+        /// </summary>
+        public void memberInfoView(MemberList memberList, int id){
             Console.WriteLine("\n-----VIEW MEMBER-----\n");
             Console.WriteLine("___________________");
             foreach(Member member in memberList.getMembers()){
@@ -159,7 +184,9 @@ namespace lm222qb_workshop2
             Console.WriteLine("___________________");
         }
 
-
+         /// <summary>
+        /// Renders the list members menu view.
+        /// </summary>
         public string listMembersView(){
             Console.WriteLine("\n-----LIST MEMBERS-----\n");
             Console.WriteLine("\n1. Compact list (name, member id and number of boats)\n2. Verbose list (name, personal number, member id and boats with boat information)\n");
@@ -168,6 +195,9 @@ namespace lm222qb_workshop2
             return userInput;
         }
 
+         /// <summary>
+        /// Renders the compact member list view.
+        /// </summary>
         public void compactListView(MemberList memberList){
             Console.WriteLine("\n-----COMPACT MEMBER LIST-----\n");
             Console.WriteLine("___________________");
@@ -177,7 +207,10 @@ namespace lm222qb_workshop2
                 Console.WriteLine("___________________");
             }
         }
-
+        
+         /// <summary>
+        /// Renders the verbose member list view.
+        /// </summary>
         public void verboseListView(MemberList memberList){
             Console.WriteLine("\n-----VERBOSE MEMBER LIST-----\n");
             Console.WriteLine("___________________");
@@ -197,6 +230,9 @@ namespace lm222qb_workshop2
             }
         }
 
+        /// <summary>
+        /// Renders error messages.
+        /// </summary>
         public void errorMessage (int errorType){
             if(errorType == 1){
                 Console.WriteLine("\nInvalid member ID.");
