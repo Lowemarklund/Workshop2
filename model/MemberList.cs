@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using Newtonsoft.Json;
+using System.Windows.Input;
+using System.Reflection;
 
 namespace lm222qb_workshop2
 {
@@ -12,7 +14,7 @@ namespace lm222qb_workshop2
     class MemberList
     {
         // The list of members
-        private List<Member> _members = new List<Member>();
+        private List<Member> members = new List<Member>();
 
         /// <summary>
         /// Adds a member to the list.
@@ -21,45 +23,50 @@ namespace lm222qb_workshop2
            
             int memberID; 
             //if there are no members in the list the ID will be 0.
-            if(_members.Count == 0){
+            if(members.Count == 0){
                 memberID = 0;
             }else{
-                memberID = _members[_members.Count - 1].Id+1;
+                memberID = members[members.Count - 1].Id+1;
             }
 
             Member newMember = new Member(name, number, memberID);
-            _members.Add(newMember);
+            members.Add(newMember);
         }
 
         /// <summary>
         /// Removes a member from the list.
         /// </summary>
         public void deleteMember(int id){
-            _members.RemoveAt(id);
+            members.RemoveAt(id);
             updateMemberIDs();
         }
 
         /// <summary>
-        /// Creates a copy of the list of members.
+        /// Returns member from the list.
         /// </summary>
         /// <returns>
-        /// A copy of the member list.
+        /// A member from the list.
+        /// </returns>
+        public Member getMember(int memberId){
+            return members[memberId];
+        }
+
+        /// <summary>
+        /// Returns the list of members.
+        /// </summary>
+        /// <returns>
+        /// The member list.
         /// </returns>
         public List<Member> getMembers(){
-            List<Member> memberListCopy = new List<Member>();
-            
-            foreach(Member member in _members){
-                memberListCopy.Add(member.Copy());
-            }
-            return memberListCopy;
+            return members;
         }
 
         /// <summary>
         /// Updates the IDs of the members in the list.
         /// </summary>
         public void updateMemberIDs (){
-            for(int i = 0; i <_members.Count; i++){
-                _members[i].Id = i;
+            for(int i = 0; i <members.Count; i++){
+                members[i].Id = i;
             }
         }
 
@@ -67,10 +74,9 @@ namespace lm222qb_workshop2
         /// Saves the member list to file.
         /// </summary>
         public void writeMemberListToFile(){
-            string path = System.IO.Directory.GetCurrentDirectory();
-            string json = JsonConvert.SerializeObject(_members);
-            File.WriteAllText($@"{path}/members.txt", String.Empty);
-            System.IO.File.WriteAllText($@"{path}/members.txt", json);
+            string json = JsonConvert.SerializeObject(members);
+            File.WriteAllText($@"./members.txt", String.Empty);
+            System.IO.File.WriteAllText($@"./members.txt", json);
         }
 
         /// <summary>
@@ -80,11 +86,9 @@ namespace lm222qb_workshop2
         /// A member list.
         /// </returns>
         private List<Member> loadMemberListFromFile(){
-            string path = System.IO.Directory.GetCurrentDirectory();
-            
+            string path = Directory.GetCurrentDirectory();
             //Error handling if file is empty.
             if(new FileInfo( $@"{path}/members.txt" ).Length == 0){
-                Console.WriteLine("1weqasd");
                 //returns empty list of members.
                 return getMembers();
             }
@@ -98,7 +102,7 @@ namespace lm222qb_workshop2
         /// Creates an instance of the MemberList class.
         /// </summary>
         public MemberList(){
-           _members = loadMemberListFromFile();
+           members = loadMemberListFromFile();
         }
 
     }

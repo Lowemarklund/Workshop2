@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+
 namespace lm222qb_workshop2
 {
     class Program
@@ -10,9 +11,10 @@ namespace lm222qb_workshop2
         {
           View view = new View();
           MemberList memberList = new MemberList();
-          User user = new User();
+          UserController userController = new UserController();
 
-          while(user.run(view, memberList));
+          while(userController.run(view, memberList));
         }
+        
     }
 }

@@ -163,24 +163,22 @@ namespace lm222qb_workshop2
          /// <summary>
         /// Renders the member info view.
         /// </summary>
-        public void memberInfoView(MemberList memberList, int id){
+        public void memberInfoView(Member member){
             Console.WriteLine("\n-----VIEW MEMBER-----\n");
             Console.WriteLine("___________________");
-            foreach(Member member in memberList.getMembers()){
-                int i = 1;
-                if(member.Id == id){
-                    string memberInfoString = $"\nName: {member.Name}\nPersonal number: {member.Number}\nId: {member.Id}\n";
-                    Console.WriteLine(memberInfoString);
+            int i = 1;
+            
+            //Writes out member info
+            string memberInfoString = $"\nName: {member.Name}\nPersonal number: {member.Number}\nId: {member.Id}\n";
+            Console.WriteLine(memberInfoString);
 
-                //Writes out each boats information
-                foreach(Boat boat in member.getBoats()){
-                    string boatInfoString = $"Boat #{i}\nType: {boat.Type}\nLength: {boat.Length}\n";
-                    i++;
-                    Console.WriteLine(boatInfoString);
-                }
-                }
-                
+            //Writes out each boats information
+            foreach(Boat boat in member.getBoats()){
+                string boatInfoString = $"Boat #{i}\nType: {boat.Type}\nLength: {boat.Length}\n";
+                i++;
+                Console.WriteLine(boatInfoString);
             }
+
             Console.WriteLine("___________________");
         }
 
@@ -256,6 +254,32 @@ namespace lm222qb_workshop2
 
              if(errorType == 6){
                 Console.WriteLine("\nNo members have yet to be added.");
+            }
+        }
+
+        public void successMessage (int successType){
+            if(successType == 1){
+                Console.WriteLine("\nMember added.");
+            }
+
+            if(successType == 2){
+                Console.WriteLine("\nMember deleted.");
+            }
+
+            if(successType == 3){
+                Console.WriteLine("\nMember Updated.");
+            }
+
+            if(successType == 4){
+                Console.WriteLine("\nBoat added.");
+            }
+
+            if(successType == 5){
+                Console.WriteLine("\nBoat deleted.");
+            }
+
+             if(successType == 6){
+                Console.WriteLine("\nBoat updated.");
             }
 
 

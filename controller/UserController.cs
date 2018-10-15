@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace lm222qb_workshop2
 {
-    class User{
+    class UserController{
         
          /// <summary>
         /// Starts the CRUD Application
@@ -49,6 +49,7 @@ namespace lm222qb_workshop2
             List<String> nameAndNumberinput = view.addMemberView();
             memberList.addMember(nameAndNumberinput[0], nameAndNumberinput[1]);
             memberList.writeMemberListToFile();
+            view.successMessage(1);
         }
 
         /// <summary>
@@ -65,6 +66,7 @@ namespace lm222qb_workshop2
 
             memberList.deleteMember(Int32.Parse(memberId));
             memberList.writeMemberListToFile();
+            view.successMessage(2);
         }
 
         /// <summary>
@@ -75,6 +77,7 @@ namespace lm222qb_workshop2
             List<String> memberIdandActionInput = view.updateMemberView();
             int memberId = Int32.Parse(memberIdandActionInput[0]);
             string action = memberIdandActionInput[1];
+            Member member = memberList.getMember(memberId);
 
             if(checkID(memberList, memberId) == false){
                 view.errorMessage(1);
@@ -84,64 +87,58 @@ namespace lm222qb_workshop2
             //Update Member info
             if(action == "1"){
                 List<String> nameAndNumberinput = view.updateMemberInfoView();
-
-                foreach(Member member in memberList.getMembers()){
-                    if(member.Id == memberId){
-                        member.updateMemberInfo(nameAndNumberinput[0], nameAndNumberinput[1]);
-                    }
-                }
+                member.updateMemberInfo(nameAndNumberinput[0], nameAndNumberinput[1]);
+                view.successMessage(3);
+                return;
             }
+
             //Add boat
             if(action == "2"){
                 List<String> boatTypeAndLengthInput = view.addBoatView();
+       
                 //Error handling
                 if(boatTypeAndLengthInput[0] != "Sailboat" && boatTypeAndLengthInput[0] != "Motorsailer" && boatTypeAndLengthInput[0] != "Kayak" && boatTypeAndLengthInput[0] != "Canoe" && boatTypeAndLengthInput[0] != "Other"){
                     view.errorMessage(3);
                     return;
                 }
 
-
-                foreach(Member member in memberList.getMembers()){
-                    if(member.Id == memberId){
-                        //Error handling
-                       if(checkBoat(member, boatTypeAndLengthInput[0]) == true){
-                           view.errorMessage(4);
-                           return;
-                       }
-                       member.addBoat(boatTypeAndLengthInput[0], Int32.Parse(boatTypeAndLengthInput[1]));
-                    }
+                if(checkBoat(member, boatTypeAndLengthInput[0]) == true){
+                    view.errorMessage(4);
+                    return;
                 }
+
+                member.addBoat(boatTypeAndLengthInput[0], Int32.Parse(boatTypeAndLengthInput[1]));
+                view.successMessage(4);
+                return;
             }
 
             //Delete boat
             if(action == "3"){
                 String boatTypeInput = view.deleteBoatView();
-                foreach(Member member in memberList.getMembers()){
-                    if(member.Id == memberId){
-                        //Error handling
-                        if(checkBoat(member, boatTypeInput) == false){
-                            view.errorMessage(5);
-                            return;
-                        }
-
-                        member.deleteBoat(boatTypeInput);
-                        return;
-                    }
+    
+                //Error handling
+                if(checkBoat(member, boatTypeInput) == false){
+                    view.errorMessage(5);
+                    return;
                 }
+
+                member.deleteBoat(boatTypeInput);
+                view.successMessage(5);
+                return;
             }
             //Update boat
             if(action == "4"){
                 List<String> boatTypeAndLengthInput = view.updateBoatView();
-                foreach(Member member in memberList.getMembers()){
-                    if(member.Id == memberId){
-                        //Error handling
-                        if(checkBoat(member, boatTypeAndLengthInput[0]) == false){
-                            view.errorMessage(5);
-                            return;
-                        }
-                       member.updateBoat(boatTypeAndLengthInput[0], Int32.Parse(boatTypeAndLengthInput[1]));
-                    }
+                
+                //Error handling
+                if(checkBoat(member, boatTypeAndLengthInput[0]) == false){
+                    view.errorMessage(5);
+                    return;
                 }
+
+                member.updateBoat(boatTypeAndLengthInput[0], Int32.Parse(boatTypeAndLengthInput[1]));
+                view.successMessage(6);
+
             //Error handling
             }else if(action != "1" && action != "2" && action != "3" && action != "4") {
                 view.errorMessage(2);
@@ -161,7 +158,8 @@ namespace lm222qb_workshop2
                 view.errorMessage(1);
                 return;
             }
-            view.memberInfoView(memberList, memberId);
+            //view.memberInfoView(member);
+            view.memberInfoView(memberList.getMember(memberId));
         }
 
          /// <summary>

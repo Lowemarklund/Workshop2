@@ -12,17 +12,20 @@ namespace lm222qb_workshop2
     {
         //The Members name.
         private string _name;
-
+        
+        //The Members personal number.
+        private string _number;
+        
         //The Members unique id.
         private int _id;
 
-        //The Members personal number.
-        private string _number;
+       
 
         //The boats belonging to the member.
         [JsonProperty("Boats")]
         private List<Boat> _boats = new List<Boat>();
 
+        //getters and setters
         public string Name {
             get{
                return _name;
@@ -54,13 +57,13 @@ namespace lm222qb_workshop2
         }
 
          /// <summary>
-        /// Creates a copy of the list of boats beloning to the member.
+        /// Returns a list of boats beloning to the member.
         /// </summary>
         /// <returns>
-        /// A copy of the boat list.
+        /// The list of boats beloning to the member.
         /// </returns>
         public List<Boat> getBoats(){
-            return _boats.Select(boat => (Boat) boat.Copy()).ToList();
+            return _boats;
         }
 
         /// <summary>
@@ -99,16 +102,6 @@ namespace lm222qb_workshop2
         public void updateMemberInfo(string name, string number){
             this.Name = name;
             this.Number = number;
-        }
-
-          /// <summary>
-        /// Creates a copy of the member.
-        /// </summary>
-        /// <returns>
-        /// A copy of the member.
-        /// </returns>
-        public Member Copy(){
-            return (Member)MemberwiseClone();        
         }
 
         /// <summary>

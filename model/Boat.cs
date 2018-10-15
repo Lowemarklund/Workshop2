@@ -8,28 +8,29 @@ namespace lm222qb_workshop2
     class Boat
     {
         //The Boat type.
-        private string _type;
+        private string type;
 
         //The length of the Boat.
-        private int _length;
+        private int length;
         
+        //Getters and setters
         public string Type {
             get{
-               return _type;
+               return type;
             }
 
             set{
-                _type = value;
+                type = value;
             }
         }
 
         public int Length {
             get{
-               return _length;
+               return length;
             }
 
             set{
-                _length = value;
+                length = value;
             }
         }
 
@@ -39,16 +40,6 @@ namespace lm222qb_workshop2
         public Boat(string type, int length){
             Type = type;
             Length = length; 
-        }
-
-        /// <summary>
-        /// Creates a copy of the Boat class.
-        /// </summary>
-        /// <returns>
-        /// A copy of the Boat.
-        /// </returns>
-        public Boat Copy(){
-            return (Boat)MemberwiseClone();        
         }
     }
 }
